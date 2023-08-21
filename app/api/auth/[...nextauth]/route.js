@@ -1,11 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
+import User from "@models/user";
 import { connectToDb } from "@utils/database";
-
-console.log({
-    clientId: process.env.GOOGLE_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET
-})
 
 const handler = NextAuth({
     providers:[
@@ -14,21 +10,39 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
     ],
-    async session({session}){
+    callbacks: {
 
-    },
-    async signIn({profile}){
-        try {
-            await connectToDb();
-
-            //check if a user already exists
-
-            //if user does not exist, create new user
-
-            return true;
-        } catch (error) {
-            console.log(error);
-            return false;
+        async session({session}){
+            const sessionUser = User.findOne({
+                email: session.user.email
+            });
+    
+            session.user.id = sessionUser._id;
+    
+            return session; 
+        },
+        async signIn({profile}){
+            try {
+                await connectToDb();
+    
+                //check if a user already exists
+                const user = await User.findOne({
+                    email: profile.email
+                });
+    
+                //if user does not exist, create new user
+                if(!user){
+                    await User.create({
+                        email: profile.email,
+                        username: profile.name.replace(' ', ''),
+                        image: profile.picture,
+                    })
+                }
+                return true;
+            } catch (error) {
+                console.log(error);
+                return false;
+            }
         }
     }
 })
