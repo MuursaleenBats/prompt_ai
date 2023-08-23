@@ -21,8 +21,9 @@ const Form = ({
 
       <form
         onSubmit={handleSubmit}
-        className='max-w-2xl w-full mt-10 flex flex-col gap 7 glassmorphism'
+        className='max-w-2xl w-full mt-10 flex flex-col gap-7 createPostForm'
       >
+        <label>
         <span className='font-satoshi text-base text-gray-700 font-semibold'>
           Your AI Prompt
         </span>
@@ -36,6 +37,37 @@ const Form = ({
           placeholder='Write Your Prompt Here...'
           className='form_textarea'
         />
+        </label>
+        <label>
+        <span className='font-satoshi text-base text-gray-700 font-semibold'>
+          Tag {` `}
+          <span className='font-normal'>(#product #webdev)</span>
+        </span>
+
+        <input 
+          value={post.tag}
+          onChange={(e) => setPost({...post,
+              tag: e.target.value
+            })
+          }
+          placeholder='#tag'
+          className='form_input'
+        />
+        </label>
+
+        <div className='flex-end mr-3 mb-3 gap-4'>
+          <Link href='/' className='text-sm text-gray-500'>
+            Cancel
+          </Link>
+
+          <button 
+            type='submit'
+            disabled={submitting}
+            className='text-sm px-3 py-1.5 bg-orange-500 rounded-full text-white'
+          >
+            {submitting ? `${type}...` : `${type}`}
+          </button>
+        </div>
       </form>
     </section>
   )
