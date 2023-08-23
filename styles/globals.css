@@ -104,7 +104,7 @@
 
 /* Form Component */
 .form_textarea {
-  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500;
+  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 focus:outline-none;
 }
 
 .form_input {
