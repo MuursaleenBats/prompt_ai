@@ -1,4 +1,5 @@
-"use client"
+'use client'
+
 import {useState} from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation';
@@ -11,7 +12,7 @@ const CreatePrompt = () => {
         tag: '',   
     });
     const {data: session} = useSession();
-    const {router} = useRouter();
+    const router = useRouter();
 
     const createPrompt = async (e) => {
       e.preventDefault();
@@ -24,10 +25,10 @@ const CreatePrompt = () => {
             userId: session?.user.id,
             tag: post.tag,
           })
-        });
+        })
 
         if(res.ok){
-          router.push('/');
+          router.push('/')
         }
       } catch (error) {
         console.log(error);
@@ -47,4 +48,4 @@ const CreatePrompt = () => {
   )
 }
 
-export default CreatePrompt
+export default CreatePrompt;
