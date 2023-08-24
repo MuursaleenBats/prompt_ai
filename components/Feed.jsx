@@ -4,15 +4,15 @@ import PromptCard from './PromptCard';
 
 const PromptCardList = ({data, handleTagClick}) => {
   return(
-    <div className='mt-16 promp_layout'>
+    <div className='mt-16 prompt_layout'>
       {
-        data.map((post) => {
+        data.map((post) => (  
           <PromptCard 
             key={post._id}
             post={post}
             handleTagClick={handleTagClick}
           />
-        })
+        ))
       }
     </div>
   )
@@ -29,12 +29,12 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch('/api/prompts');
+      const res = await fetch('/api/prompt');
       const data = await res.json();
 
       setPosts(data);
     }
-
+    console.log(posts);
     fetchPosts();
   }, [])
 
