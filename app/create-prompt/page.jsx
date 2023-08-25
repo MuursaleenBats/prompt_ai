@@ -11,21 +11,21 @@ const CreatePrompt = () => {
         prompt: '',
         tag: '',   
     });
-    const {data: session} = useSession();
+    const { data: session } = useSession();
     const router = useRouter();
 
     const createPrompt = async (e) => {
       e.preventDefault();
       setSubmitting(true);
       try {
-        const res = await fetch('/api/prompt/new', {
-          method: 'POST',
+        const res = await fetch("/api/prompt/new", {
+          method: "POST",
           body: JSON.stringify({
             prompt: post.prompt,
             userId: session?.user.id,
             tag: post.tag,
-          })
-        })
+          }),
+        });
 
         if(res.ok){
           router.push('/')
