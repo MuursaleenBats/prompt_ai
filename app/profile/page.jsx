@@ -30,7 +30,7 @@ const MyProfile = () => {
     <Profile 
         name='My'
         desc='Welcome to your personalized profile page'
-        data={[]}
+        data={posts}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
     />
