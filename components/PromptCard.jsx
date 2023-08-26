@@ -11,7 +11,12 @@ const PromptCard = ({
   handleDelete
 }) => {
 
-  const [copied, setCopied] = useState("")
+  const [copied, setCopied] = useState("");
+  const handleCopy = () => {
+    setCopied(post.prompt);
+    navigator.clipboard.writeText(post.prompt);
+    setTimeout(() => setCopied(""), 3000);
+  }
   return (
     <div className='prompt_card'>
       <div className='flex justify-between items-start gap-5'>
@@ -35,7 +40,7 @@ const PromptCard = ({
             </p>
           </div>
         </div>
-        <div className='copy_btn' onClick={()=>{}}>
+        <div className='copy_btn' onClick={()=>{handleCopy()}}>
             <Image
               src={copied === post.prompt ? '/assets/icons/tick.svg' : 'assets/icons/copy.svg'}
               width={12}
