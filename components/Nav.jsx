@@ -42,11 +42,15 @@ const Nav = () => {
                             Create Post
                         </Link>
 
+                        <Link href='/profile' className='black_btn'>
+                            View Profile
+                        </Link>
+
                         <button className='outline_btn' onClick={signOut}>
                             Sign Out
                         </button>
 
-                        <Link href='/profile'>
+                        <Link href='/user-profile'>
                             <Image 
                                 src={session?.user.image}
                                 width={37}
